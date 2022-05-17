@@ -87,6 +87,24 @@ Node* createNewHeap(Node* a) {
         return merge( merge(first, second), createNewHeap(maybe) );
     }
 }
+
+Node* naiveCreateNewHeap(Node* a) {
+    //a is left child
+    if( a == nullptr || a->getBrother() == nullptr ) 
+        return a;
+    else {
+        Node* first = a;
+        Node* brother = a->getBrother();
+        first->setBrother(nullptr);
+
+        while( brother != nullptr ) {
+            first->addChild(brother);
+            brother = brother->getBrother();
+        }
+
+        return first;
+    }
+}
  
 vector<Node*> v;
  
